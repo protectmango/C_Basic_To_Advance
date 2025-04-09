@@ -1,5 +1,7 @@
 Character are treated as 1 byte integers.
 
+Memory allocation : 1 byte.
+
 Char datatypes :
 	signed : 1 signed bit + 7 data bit.
 	
