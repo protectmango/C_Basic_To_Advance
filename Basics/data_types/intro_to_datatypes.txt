@@ -1,0 +1,10 @@
+Data Types : It define to compiler which type of human readable data it is.
+
+	char : used for character.
+	int : used for integer.
+	Real 
+	    float : 23.5f, 0.24f, -2.34f
+	    double : 23.5, 0.23, -3.5
+
+	string : "abc", "123", "he#123"
+	

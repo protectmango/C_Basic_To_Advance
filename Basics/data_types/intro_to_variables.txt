@@ -1,0 +1,37 @@
+Variables 
+
+If we want to deal with variable nature of data
+First we need to declare a variable.
+
+In C language we can declare variable in two places
+	above main() -> global variable.
+	inside main() -> local variable.
+
+How to declare a variable ?
+
+Syntax 
+	Basic : datatype variable_name;
+	
+	Advance : Storage_class_type Type_qualifier Size_type Signed_type datatype variable_name ;
+		
+		Storage class Type : -auto 
+				     -static
+				     -extern
+				     -register
+
+		Type qualifier : -const
+				 -volatile
+
+		Size type : -short
+			    -long 
+			    -long long
+
+		Signed type : signed
+			      unsigned
+
+
+Rules For Writing a variable name :
+	includes : a-z, A-Z, 0-9, special_character : _
+	
+	excludes : 1st letter should not be a digit.
+		   should not be a keyword.
