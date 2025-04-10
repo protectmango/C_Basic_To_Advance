@@ -1,0 +1,34 @@
+What is Endianness ? 
+
+Endianness is a way of storing data in given memory location.
+	Also called Byte Ordering.
+
+This is a key concept related in Hardware (Processor).
+
+Types :
+	Little Endianness : LSB is given to lower addresses.
+
+	Memory : 4 Bytes. |0|0|0|0|0|0|0|0| |0|0|0|0|0|0|0|0| |0|0|0|0|0|0|0|0| |0|0|0|0|0|0|0|0|
+			   |		 |   |		   |   |	     |	 |	       |
+			   |		 |   |		   |   |	     |	 |	       |
+			  31		 24 23   	   16 15 	     8	 7	       0
+	
+	Address 			
+	Location :		 1003		   1002		      1001	       1000		
+
+	Processor Examples : Intel, ARM, AMD64.
+
+
+	Big Endianness : LSB is given to higher address location.
+
+	Memory : 4 Bytes. |0|0|0|0|0|0|0|0| |0|0|0|0|0|0|0|0| |0|0|0|0|0|0|0|0| |0|0|0|0|0|0|0|0|
+			   |		 |   |		   |   |	     |	 |	       |
+			   |		 |   |		   |   |	     |	 |	       |
+			  31		 24 23   	   16 15 	     8	 7	       0
+
+	Address 			
+	Location :		 1000		   1001		      1002	       1003		
+
+
+	Processor Examples : Motorola 65000, IBM Power PC, SPARC. 
+
