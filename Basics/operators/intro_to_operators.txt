@@ -1,0 +1,223 @@
+Operators : Operator are symbols which perform certain operation on one or more than one value (operands).
+
+Types : 	
+	Assignment Operator :	Symbol : =
+
+				Syntax : operand1 = operand2;
+				Associativity : right to left.		
+
+	Arithmetic Operator :	Symbol : + - * / % 
+				
+				Priority order : * / %    High
+						 + -	  Low
+				
+				Syntax : operand1 operator operand2
+				Eg :	    a	     *	      b	 
+				Eg :	    a	     /	      b
+				Eg :	    a	     %	      b		
+				Eg :	    a	     +	      b
+				Eg :	    a	     -	      b
+
+				Associativity : left to right.
+	 
+	Relational Operator :   Symbol : < <= > >= == !=
+
+				Syntax : operand1 operator operand2
+				Eg :	    a	     <	      b	 
+				Eg :	    a	     <=	      b
+				Eg :	    a	     >	      b
+				Eg :	    a	     >=	      b
+				Eg :	    a	     ==	      b
+				Eg :	    a	     !=	      b
+
+				Associativity : left to right.
+
+	
+	Logical Operator :	Symbol : && || !
+
+				Syntax : operand1 operator operand2
+				Eg :	    a	     &&	      b	 
+				Eg :	    a	     ||	      b	 
+				Eg :	    a	     !	      b	 
+
+				Associativity : left to right
+
+	Bitwise Operator :	Symbol : & | ^ ~ << >>
+
+				Syntax : operand1 operator operand2
+				Eg :	    a	     &	      b	 
+				Eg :	    a	     |	      b	 
+				Eg :	    a	     ^	      b	 
+				Eg :	    a	     ~	      b	 
+				Eg :	    a	     <<	      b	 
+				Eg :	    a	     >>	      b	 
+				
+				Associativity : left to right
+
+				
+				
+				Eg : int a = 4 , b = 5 ,c = -15 , d = -20 result ;
+				
+				     result = a & b;	
+					      4 & 5
+						
+				a	      |0|0|0|0|0|0|0|0| |0|0|0|0|0|0|0|0| |0|0|0|0|0|0|0|0| |0|0|0|0|0|1|0|0|			
+				&	
+				b	      |0|0|0|0|0|0|0|0| |0|0|0|0|0|0|0|0| |0|0|0|0|0|0|0|0| |0|0|0|0|0|1|0|1|
+					-----------------------------------------------------------------------------
+				result	      |0|0|0|0|0|0|0|0| |0|0|0|0|0|0|0|0| |0|0|0|0|0|0|0|0| |0|0|0|0|0|1|0|0|	
+				     			
+				     result = a | b;	
+					      4 | 5
+						
+				a	      |0|0|0|0|0|0|0|0| |0|0|0|0|0|0|0|0| |0|0|0|0|0|0|0|0| |0|0|0|0|0|1|0|0|			
+				|	
+				b	      |0|0|0|0|0|0|0|0| |0|0|0|0|0|0|0|0| |0|0|0|0|0|0|0|0| |0|0|0|0|0|1|0|1|
+					-----------------------------------------------------------------------------
+				result	      |0|0|0|0|0|0|0|0| |0|0|0|0|0|0|0|0| |0|0|0|0|0|0|0|0| |0|0|0|0|0|1|0|1|	
+
+				     result = a ^ b;	
+					      4 ^ 5
+						
+				a	      |0|0|0|0|0|0|0|0| |0|0|0|0|0|0|0|0| |0|0|0|0|0|0|0|0| |0|0|0|0|0|1|0|0|			
+				^	
+				b	      |0|0|0|0|0|0|0|0| |0|0|0|0|0|0|0|0| |0|0|0|0|0|0|0|0| |0|0|0|0|0|1|0|1|
+					-----------------------------------------------------------------------------
+				result	      |0|0|0|0|0|0|0|0| |0|0|0|0|0|0|0|0| |0|0|0|0|0|0|0|0| |0|0|0|0|0|1|0|0|	
+
+				     result = ~a;	
+					      ~4
+						
+				a	      |0|0|0|0|0|0|0|0| |0|0|0|0|0|0|0|0| |0|0|0|0|0|0|0|0| |0|0|0|0|0|1|0|0|			
+				~	
+					-----------------------------------------------------------------------------
+				result	      |1|1|1|1|1|1|1|1| |1|1|1|1|1|1|1|1| |1|1|1|1|1|1|1|1| |1|1|1|1|1|0|1|1|	
+
+
+
+
+				    result = b<<2;
+
+				b	      |0|0|0|0|0|0|0|0| |0|0|0|0|0|0|0|0| |0|0|0|0|0|0|0|0| |0|0|0|0|0|1|0|1|
+					       ^ ^ ^ ^							   ^ ^ ^ ^ ^
+					       | | | |							   | | | | |
+					      31 | | |							   | | | | 0	
+						 30| |							   | | | 1
+						   29|							   | | 2	
+ 						     28	 						   4 3
+
+				1st Shift :  Bit on 0 index is shifted to index 1
+					     Bit on 31 index is removed from the binary
+					     Every bit is shifted to its next index		
+
+					      |0|0|0|0|0|0|0|0| |0|0|0|0|0|0|0|0| |0|0|0|0|0|0|0|0| |0|0|0|0|1|0|1|0|
+					       ^ ^ ^ ^							   ^ ^ ^ ^ ^
+					       | | | |							   | | | | |
+					      31 | | |							   | | | | 0	
+						 30| |							   | | | 1
+						   29|							   | | 2	
+ 						     28	 						   4 3
+
+				2nd Shift :  Bit on 0 index is shifted to index 2
+					     Bit on 30 index is removed from the binary
+					     Every bit is shifted to its next index		
+
+					      |0|0|0|0|0|0|0|0| |0|0|0|0|0|0|0|0| |0|0|0|0|0|0|0|0| |0|0|0|1|0|1|0|0|
+					       ^ ^ ^ ^							   ^ ^ ^ ^ ^
+					       | | | |							   | | | | |
+					      31 | | |							   | | | | 0	
+						 30| |							   | | | 1
+						   29|							   | | 2
+						     28							   4 3	
+
+				Result  :     |0|0|0|0|0|0|0|0| |0|0|0|0|0|0|0|0| |0|0|0|0|0|0|0|0| |0|0|0|1|0|1|0|0|
+
+				Output  :     20 
+
+	
+
+	
+	Conditional Operator :	Symbol : ? : (colon)
+
+				Syntax : operand1 operator1 operand2 operator2 operand3
+				Eg :	    a	     ?	       b	 :	  c
+
+				Associativity : right to left
+
+				Eg : int a = 4 , b = 7 , result ;
+				     a < b ? printf("Yes\n") : printf("No\n");
+						      ^                ^
+						      |	               |
+				condition :	    True	     False	
+
+
+
+
+	SizeOf Operator :	Symbol : sizeof()
+
+				Syntax : sizeof(datatype)
+				Eg :	 sizeof(char)      1 byte
+				Eg :	 sizeof(int)       4 byte
+				Eg : 	 sizeof(long)	   8 byte (64 bits OS)
+
+				For constants
+				Eg : 	 sizeof('a')	   4 byte
+					 In this example the constant 'a' ascii value will be passed as by default ascii
+					 of 'a' is 97 which is a decimal number or integer thus will get assigned 4 byte.
+
+				Eg : 	 char ch = 'a';   
+					 sizeof(ch);	   1 byte.
+			
+
+	Comma Operator :	Symbol : ,
+				
+				Syntax : operand1 comma operand2
+
+				It has dual Behaviour 
+					Seperator : variable declaration 
+						    Eg :  int i=1 , j=2 , k=3 , l=4;
+									^		    
+									|
+								    Seperator
+
+						    function
+						    Eg : printf( "%d \n " , i);	
+									  ^
+									  |
+								    Seperator			
+
+					Operator :
+						    Eg :  int i = ( 1 , 2 , 3 , 4 , 5 );
+									  ^
+									  |
+								      Operator	
+						    In this 5 will be assign to i 
+						    Right most value is assigned to i. Which is 5
+				
+				Associativity : left to right. 		
+
+	Increment|Decrement Operator : Symbol : ++ --
+				       
+				       Syntax : pre -	 operator operand   
+						Eg :     ++	  i
+						Eg : 	 --	  i
+
+						First Increment then assign.
+
+						Eg : int i = 4, j ;
+						     j = ++i;
+						     printf( "%d\n" , j );
+					
+						Output : 5
+
+						post -   operand  operator
+						Eg :     i	  ++
+						Eg : 	 i	  --
+						
+						First Assign then increment.
+						
+						Eg : int i = 4, j ;
+						     j = i++	
+						     printf( "%d\n" , j );
+					
+						Output : 4
