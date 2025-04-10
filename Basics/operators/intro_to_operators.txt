@@ -110,6 +110,8 @@ Types :
 					     Bit on 31 index is removed from the binary
 					     Every bit is shifted to its next index		
 
+
+				    Deleted <--|<-|								 <-|<---0
 					      |0|0|0|0|0|0|0|0| |0|0|0|0|0|0|0|0| |0|0|0|0|0|0|0|0| |0|0|0|0|1|0|1|0|
 					       ^ ^ ^ ^							   ^ ^ ^ ^ ^
 					       | | | |							   | | | | |
@@ -122,6 +124,8 @@ Types :
 					     Bit on 30 index is removed from the binary
 					     Every bit is shifted to its next index		
 
+
+				    Deleted <--<-|							       <-<-|<---0
 					      |0|0|0|0|0|0|0|0| |0|0|0|0|0|0|0|0| |0|0|0|0|0|0|0|0| |0|0|0|1|0|1|0|0|
 					       ^ ^ ^ ^							   ^ ^ ^ ^ ^
 					       | | | |							   | | | | |
