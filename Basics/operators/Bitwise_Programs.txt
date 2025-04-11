@@ -1,0 +1,185 @@
+Swap two number using bitwise operator :
+
+Logic :
+
+	num1 = num1^num2;
+	num2 = num1^num2;
+	num1 = num1^num2;
+
+Single line Expression :
+	
+	num1 = num1^num2 = num2^num1 = num1^num2;
+	
+	num1 ^= num2 ^= num1 ^= num2;
+
+
+
+To set a bit of given index :
+
+Logic : 
+	ch = ch | 1 << pos;
+	------------------
+	Eg : 	|0|1|1|0|0|1|0|0|
+		       ^
+		       |
+		 index 4 			
+
+	1 << 4  |0|0|0|1|0|0|0|0|
+
+	Bitwise OR | : ch | 1<<4 ;
+
+
+	 	|0|1|1|1|0|1|0|0|
+		       ^
+		       |
+		 index 4 is set			
+
+	   	
+To clear a bit of given index :
+
+Logic :
+	ch = ch & ~(1<<pos);
+	-------------------
+	Eg : 	|0|1|1|0|0|1|0|0|
+		     ^
+		     |
+	       index 5
+	
+	1 << 5  |0|0|1|0|0|0|0|0|
+	
+       ~(1<<5)  |1|1|0|1|1|1|1|1|
+
+	Bitwise And & : ch & ~(1<<5)
+
+	
+		|0|1|0|0|0|1|0|0|
+		     ^
+		     |
+	       index 5 is clear
+
+
+
+To toggle(compliment) a bit of a given index :
+
+Logic :
+	ch = ch ^ 1 << pos ;
+	-------------------
+	Eg : 	|0|1|1|0|0|1|0|0|
+		     ^
+		     |
+	       index 5  			
+
+	1 << 5  |0|0|1|0|0|0|0|0|
+
+	Bitwise XOR | : ch ^ 1<<5 ;
+
+
+	 	|0|1|0|1|0|1|0|0|
+		     ^
+		     |
+	       index 5 is toggled(complimented or inverted)
+
+
+To check a bit of index is set or clear :
+
+Logic :
+	result = num >> pos & 1;
+	-----------------------
+	Eg : 		|0|1|1|0|0|1|0|0|
+
+      	num >> 5	|0|0|0|0|0|0|1|1|
+	
+	Bitwise AND & : num >> 5 & 1
+			
+	1		|0|0|0|0|0|0|0|1|
+	---------------------------------
+	Result :	|0|0|0|0|0|0|0|1|
+	---------------------------------
+	
+	Therefore the bit is set.
+
+
+To check a number is positive or negative
+
+Logic : 
+	num >> 31 & 1 ? printf ( "negative" ) : printf( " postive " );
+				     ^			      ^	
+				     |			      |
+				    True		    False
+
+
+
+To check a number is even or odd
+
+Logic :
+	num & 1 ? printf ( " Odd " ) : printf ( " Even " ) ;
+			      ^			   ^	
+			      |			   |
+			    True		 False
+	
+	Odd Number
+
+	Eg : 5  |0|0|0|0|0|1|0|1|
+	     &	
+	     1	|0|0|0|0|0|0|0|1|
+		-----------------
+		|0|0|0|0|0|0|0|1|
+
+ 	Even Number
+
+	Eg : 4  |0|0|0|0|0|1|0|0|
+	     &	
+	     1	|0|0|0|0|0|0|0|1|
+		-----------------
+		|0|0|0|0|0|0|0|0|
+ 	
+	
+
+To check a number is lower case or upper case
+
+Logic : 
+	num >> 5 & 1 ? printf ( " Lower Case " ) : printf ( " Upper Case " );
+
+	num & 32 ? printf ( " Lower Case " ) : printf ( " Upper Case " );
+
+
+
+To check two number are equal or not 
+
+Logic : 
+	num1 ^ num2 ? printf ( " Not Equal " ) : printf ( " Equal " );
+	Eg : 5  |0|0|0|0|0|1|0|1|
+	     ^ 	
+	     5	|0|0|0|0|0|1|0|1|
+		-----------------
+		|0|0|0|0|0|0|0|0|	Equal
+
+	Eg : 5  |0|0|0|0|0|1|0|1|
+	     ^ 	
+	     4	|0|0|0|0|0|1|0|0|
+		-----------------
+		|0|0|0|0|0|0|0|1|	Not Equal
+
+
+	
+To check given number is power of 2
+
+Logic : 
+	num & ( num - 1) ? printf( "Not Power of 2" ) : printf( "Power of 2" );
+	Eg : 4  |0|0|0|0|0|1|0|0|
+	     & 	
+	     3	|0|0|0|0|0|0|1|1|
+		-----------------
+		|0|0|0|0|0|0|0|0|	Power of 2
+
+	Eg : 5  |0|0|0|0|0|1|0|1|
+	     ^ 	
+	     4	|0|0|0|0|0|1|0|0|
+		-----------------
+		|0|0|0|0|0|0|0|1|	Not Power of 2
+
+
+
+
+
+
