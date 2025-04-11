@@ -1,0 +1,142 @@
+Bitwise Operators : To perform bit by bit operation.
+
+To perform a bitwise operation on operand we first need to convert operands into their binary.
+
+Operands are not modified.
+
+Bitwise Operators are not applicable on real number (Float, Double).
+
+Symbols : & | ^ ~ << >>
+
+
+ -----------------------------------
+|i	j	i&j	i|j	i^j |
+|-----------------------------------| 
+|0	0	 0	 0 	 0  |	
+|0	1	 0	 1	 1  |
+|1	0	 0	 1	 0  |
+|1	1	 1	 1	 0  |
+------------------------------------
+
+
+Compliments Operator : It inverts all the bits 
+	      Symbol : ~
+
+		  Eg : i = -15
+			
+			15	|0|0|0|0|1|1|1|1|
+				|1|1|1|1|0|0|0|0|
+					       1	
+				-----------------
+		       -15	|1|1|1|1|0|0|0|1|
+				-----------------
+			~	|0|0|0|0|1|1|1|0|
+
+		Result  :	14
+
+
+Shift Operator : Bits are shifted from their index to required position.
+		 In a shift operator first operand represent data on which we have to work and
+		 Second operand represent no of shift.
+
+    Left Shift : num << pos;
+
+		 int b = 5;			
+		 result = b<<2;
+		 here b is data and 2 signifies no of left shift operation we need to perform on b.	
+
+				b	      |0|0|0|0|0|0|0|0| |0|0|0|0|0|0|0|0| |0|0|0|0|0|0|0|0| |0|0|0|0|0|1|0|1|
+					       ^ ^ ^ ^							   ^ ^ ^ ^ ^
+					       | | | |							   | | | | |
+					      31 | | |							   | | | | 0	
+						 30| |							   | | | 1
+						   29|							   | | 2	
+ 						     28	 						   4 3
+
+				1st Shift :  Bit on 0 index is shifted to index 1
+					     Bit on 31 index is removed from the binary
+					     Every bit is shifted to its next index		
+
+
+				    Deleted <--|<-|								 <-|<---0
+					      |0|0|0|0|0|0|0|0| |0|0|0|0|0|0|0|0| |0|0|0|0|0|0|0|0| |0|0|0|0|1|0|1|0|
+					       ^ ^ ^ ^							   ^ ^ ^ ^ ^
+					       | | | |							   | | | | |
+					      31 | | |							   | | | | 0	
+						 30| |							   | | | 1
+						   29|							   | | 2	
+ 						     28	 						   4 3
+
+				2nd Shift :  Bit on 0 index is shifted to index 2
+					     Bit on 30 index is removed from the binary
+					     Every bit is shifted to its next index		
+
+
+				    Deleted <--<-|							       <-<-|<---0
+					      |0|0|0|0|0|0|0|0| |0|0|0|0|0|0|0|0| |0|0|0|0|0|0|0|0| |0|0|0|1|0|1|0|0|
+					       ^ ^ ^ ^							   ^ ^ ^ ^ ^
+					       | | | |							   | | | | |
+					      31 | | |							   | | | | 0	
+						 30| |							   | | | 1
+						   29|							   | | 2
+						     28							   4 3	
+
+				Result  :     |0|0|0|0|0|0|0|0| |0|0|0|0|0|0|0|0| |0|0|0|0|0|0|0|0| |0|0|0|1|0|1|0|0|
+
+				Output  :     20 
+	
+	
+
+			
+ 	Right Shift : num >> pos;
+
+		 In a right shift if first operand is signed then 1 will be added as new bits.
+		 If the first operand is unsigned then 0 will be added as new bits
+
+		 int b = 5;			
+		 result = b>>2;
+		 here b is data and 2 signifies no of left shift operation we need to perform on b.	
+
+				b	      |0|0|0|0|0|0|0|0| |0|0|0|0|0|0|0|0| |0|0|0|0|0|0|0|0| |0|0|0|0|0|1|0|1|
+					       ^ ^ ^ ^							   ^ ^ ^ ^ ^
+					       | | | |							   | | | | |
+					      31 | | |							   | | | | 0	
+						 30| |							   | | | 1
+						   29|							   | | 2	
+ 						     28	 						   4 3
+
+				1st Shift :  Bit on 0 index is deleted from the binary
+					     Bit on 31 index is shifted to index 30
+					     Every bit is shifted to its previous index		
+
+
+				    	0-->|->|								 >-|--->Deleted
+					      |0|0|0|0|0|0|0|0| |0|0|0|0|0|0|0|0| |0|0|0|0|0|0|0|0| |0|0|0|0|0|0|1|0|
+					       ^ ^ ^ ^							   ^ ^ ^ ^ ^
+					       | | | |							   | | | | |
+					      31 | | |							   | | | | 0	
+						 30| |							   | | | 1
+						   29|							   | | 2	
+ 						     28	 						   4 3
+
+				2nd Shift :  Bit on 0 index is shifted to index 2
+					     Bit on 30 index is removed from the binary
+					     Every bit is shifted to its next index		
+
+
+				    	   0--->-->|							       |-->|-->Deleted
+					      |0|0|0|0|0|0|0|0| |0|0|0|0|0|0|0|0| |0|0|0|0|0|0|0|0| |0|0|0|0|0|0|0|1|
+					       ^ ^ ^ ^							   ^ ^ ^ ^ ^
+					       | | | |							   | | | | |
+					      31 | | |							   | | | | 0	
+						 30| |							   | | | 1
+						   29|							   | | 2
+						     28							   4 3	
+
+				Result  :     |0|0|0|0|0|0|0|0| |0|0|0|0|0|0|0|0| |0|0|0|0|0|0|0|0| |0|0|0|0|0|0|0|1|
+
+				Output  :     1 
+
+
+
+
