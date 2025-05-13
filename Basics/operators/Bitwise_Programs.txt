@@ -180,6 +180,11 @@ Logic :
 
 
 
+To delete a bit generic formula
 
+t1 = num << (pos - 32) >> (pos - 32);
+t2 = num >> (pos + 1) << pos;
+
+result = t1 | t2;
 
 
