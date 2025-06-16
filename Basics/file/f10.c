@@ -49,15 +49,42 @@ int main(int argc, char **argv)
 		fgets(lines[i],(longest_line + 1), file);
 	}
 
+	char *temp = malloc(sizeof(char)*(longest_line + 1 ));
+	
 	for(i=0; i<total_lines; i++)
 	{
 		if(strstr(lines[i],argv[2]))
-		printf("%s",lines[i]);
+		{
+			char *q = strstr(lines[i],argv[2]);
+			strcpy(temp ,  q + strlen(argv[2]));
+			strcpy(q,argv[3]); // overwriting old data with new word
+			strcpy(q + strlen(argv[3]), temp);
+
+			printf("%s",lines[i]);
+
+		}
+	}
+
+	fclose(file);
+
+
+
+	FILE *newfile = fopen(argv[1],"w");
+
+	for(i=0; i< total_lines; i++)
+	{
+		fputs(lines[i],newfile);
 	}
 
 
+	fclose(newfile);
 
-	fclose(file);
+	printf("Data Modified Successfully\n");
+
+	for(i=0;i<total_lines ; i++)
+		free(lines[i]);
+
+	free(lines);
 
 }
 
