@@ -15,7 +15,7 @@ struct date {
 
 // Student structure
 struct st {
-    char batch_id[10];              // v22be8a1
+    char batch_id[10];              // v24be8g5
     char name[50];                  // full name
     float avg_internal_marks;       // 70%
     char assessment_status[5];      // r nr

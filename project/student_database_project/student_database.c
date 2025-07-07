@@ -220,7 +220,7 @@ void input_student_data(struct st* students, int n) {
     for (i = 0; i < n; i++) {
         printf("\n--- Enter details for Student %d ---\n", i + 1);
         
-        printf("Batch ID (e.g., v22be8a1): ");
+        printf("Batch ID (e.g., v24be8g5): ");
         scanf("%s", students[i].batch_id);
         
         printf("Full Name: ");

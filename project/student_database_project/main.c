@@ -135,7 +135,7 @@ int main() {
             
             case 11: {
                 char batch_prefix[7];
-                printf("Enter batch prefix (first 6 characters, e.g., v22be8): ");
+                printf("Enter batch prefix (first 6 characters, e.g., v24be8): ");
                 scanf("%s", batch_prefix);
                 delete_all_students_by_batch(batch_prefix);
                 break;

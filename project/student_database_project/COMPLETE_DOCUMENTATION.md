@@ -1,5 +1,9 @@
 # Student Database Management System - Complete Technical Documentation
 
+**Version**: v24be8g5  
+**Last Updated**: 2025-01-07  
+**Author**: C Programming Coursework - Basic to Advanced Level
+
 ---
 
 ## TABLE OF CONTENTS
@@ -83,7 +87,7 @@ struct date {
 ### Student Structure
 ```c
 struct st {
-    char batch_id[10];              // Unique identifier (e.g., "v22be8a1")
+    char batch_id[10];              // Unique identifier (e.g., "v24be8g5")
     char name[50];                  // Full name of the student
     float avg_internal_marks;       // Average marks (0-100)
     char assessment_status[5];      // Assessment result ("r"/"nr")
@@ -214,7 +218,7 @@ char* get_batch_filename(char* batch_id) {
 - Creates filename by appending ".txt" extension
 - Uses static storage for return value
 
-**Example**: "v22be8a1" → "v22be8.txt"
+**Example**: "v24be8g5" → "v24be8.txt"
 
 ### Student Data I/O
 
@@ -641,7 +645,7 @@ int main() {
             case 11: {
                 // Delete all students by batch
                 char batch_prefix[7];
-                printf("Enter batch prefix (first 6 characters, e.g., v22be8): ");
+                printf("Enter batch prefix (first 6 characters, e.g., v24be8): ");
                 scanf("%s", batch_prefix);
                 delete_all_students_by_batch(batch_prefix);
                 break;
@@ -723,17 +727,33 @@ if (students == NULL) {
 
 ### Deleting a Student
 1. Select option 10 from menu
-2. Enter exact batch ID (e.g., "v22be8a1")
+2. Enter exact batch ID (e.g., "v24be8g5")
 3. Review student details displayed
 4. Confirm deletion (y/n)
 5. Student is removed and registry updated
 
 ### Deleting Entire Batch
 1. Select option 11 from menu
-2. Enter batch prefix (e.g., "v22be8")
+2. Enter batch prefix (e.g., "v24be8")
 3. Review list of all students in batch
 4. Confirm deletion (y/n)
 5. Entire batch file is removed and registry updated
+
+---
+
+## VERSION HISTORY
+
+### v24be8g5 (2025-01-07)
+**Major Release - Enhanced Functionality**
+- **NEW**: Comprehensive delete operations (single student and entire batch)
+- **NEW**: Enhanced batch registry system for better performance
+- **IMPROVED**: Error handling and data validation throughout the system
+- **IMPROVED**: Safety features with confirmation dialogs for destructive operations
+- **IMPROVED**: Memory management and file operations
+- **UPDATED**: Complete technical documentation with detailed specifications
+- **UPDATED**: All example batch IDs from v22be8a1 to v24be8g5
+- **FIXED**: Various minor bugs and edge cases
+
 
 ---
 
@@ -745,5 +765,6 @@ This Student Database Management System demonstrates:
 - **Portable Design**: File-based registry eliminating system dependencies
 - **User-Friendly Interface**: Clear menu system with confirmation dialogs
 - **Scalable Architecture**: Modular design supporting future enhancements
+- **Production Ready**: Comprehensive delete operations with safety confirmations
 
-The system successfully balances functionality, safety, and performance while maintaining code clarity and maintainability.
+The system successfully balances functionality, safety, and performance while maintaining code clarity and maintainability. Version v24be8g5 represents a significant improvement in reliability and user experience.

@@ -14,13 +14,16 @@ A comprehensive C program for managing student records with dynamic memory alloc
    - Search by batch ID
    - Search by marks range
    - Search by assessment status
-4. **Record Editing**: Edit existing student information
+4. **Record Management**: Edit and delete existing student information
 5. **Display All Records**: View all stored student records
+6. **Batch Registry System**: Centralized tracking of active batches
+7. **Data Validation**: Comprehensive input validation for all fields
+8. **Safety Features**: Confirmation dialogs for destructive operations
 
 ### Student Structure
 ```c
 struct st {
-    char batch_id[10];              // e.g., v22be8a1
+    char batch_id[10];              // e.g., v24be8g5
     char name[50];                  // Full name
     float avg_internal_marks;       // Average marks (0-100)
     char assessment_status[5];      // "r" (regular) or "nr" (non-regular)
@@ -93,7 +96,9 @@ gcc -Wall -Wextra -std=c99 -o student_database main.o student_database.o
 7. **Search by marks range**: Find students within a marks range
 8. **Search by assessment status**: Find students by assessment status
 9. **Display all records**: Show all stored student records
-10. **Exit**: Quit the program
+10. **Delete student by ID**: Remove a specific student record
+11. **Delete entire batch**: Remove all students from a batch
+12. **Exit**: Quit the program
 
 ### Sample Usage
 
@@ -122,11 +127,24 @@ gcc -Wall -Wextra -std=c99 -o student_database main.o student_database.o
 4. Select the field to edit
 5. Enter the new value
 
+#### Deleting Records
+**Delete Single Student:**
+1. Select option 10 from the menu
+2. Enter the exact batch ID of the student to delete
+3. Review the student details displayed
+4. Confirm deletion (y/n)
+
+**Delete Entire Batch:**
+1. Select option 11 from the menu
+2. Enter the batch prefix (first 6 characters, e.g., v24be8)
+3. Review the list of all students in the batch
+4. Confirm deletion (y/n)
+
 ## File Storage
 
 The program stores student records in binary files named after their batch IDs:
 - `v24be8.txt` - Contains all students from batch v24be8
-- `v24be7.txt` - Contains all students from batch v24be7
+- `v24be9.txt` - Contains all students from batch v24be9
 - etc.
 
 ## Data Validation
@@ -175,15 +193,29 @@ The program includes validation for:
 - Cross-platform compatible
 - Tested on macOS, Linux, and Windows
 
+## Version Information
+
+**Current Version**: v24be8g5
+**Release Date**: 2025-01-07
+**Key Updates in v24be8g5**:
+- Enhanced batch registry system for better performance
+- Added comprehensive delete operations (single student and entire batch)
+- Improved error handling and data validation
+- Enhanced safety features with confirmation dialogs
+- Better memory management and file operations
+- Updated documentation with detailed technical specifications
+
 ## Future Enhancements
 
 Possible improvements:
-1. Add sorting functionality
+1. Add sorting functionality for better data organization
 2. Implement binary search for faster lookups
-3. Add data import/export features
-4. Implement user authentication
-5. Add statistical analysis features
-6. Create a GUI version
+3. Add data import/export features (CSV, JSON)
+4. Implement user authentication and access control
+5. Add statistical analysis and reporting features
+6. Create a GUI version using GTK+ or Qt
+7. Add backup and restore functionality
+8. Implement database encryption for sensitive data
 
 ## License
 
