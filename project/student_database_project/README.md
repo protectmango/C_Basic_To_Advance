@@ -101,7 +101,7 @@ gcc -Wall -Wextra -std=c99 -o student_database main.o student_database.o
 1. Select option 1 from the menu
 2. Enter the number of students to add
 3. For each student, provide:
-   - Batch ID (e.g., v22be8a1)
+   - Batch ID (e.g., v24be8g5)
    - Full name
    - Average internal marks (0-100)
    - Assessment status (r/nr)
@@ -111,7 +111,7 @@ gcc -Wall -Wextra -std=c99 -o student_database main.o student_database.o
 #### Searching Records
 - **By Date**: Enter date in DD MM YYYY format
 - **By Name**: Enter the full name (case-insensitive)
-- **By Batch ID**: Enter batch ID (e.g., v22be8a1)
+- **By Batch ID**: Enter batch ID (e.g., v24be8g5)
 - **By Marks**: Enter minimum and maximum marks
 - **By Status**: Enter "r" for regular or "nr" for non-regular
 
@@ -125,8 +125,8 @@ gcc -Wall -Wextra -std=c99 -o student_database main.o student_database.o
 ## File Storage
 
 The program stores student records in binary files named after their batch IDs:
-- `v22be8a1.dat` - Contains all students from batch v22be8a1
-- `v22be8a2.dat` - Contains all students from batch v22be8a2
+- `v24be8.txt` - Contains all students from batch v24be8
+- `v24be7.txt` - Contains all students from batch v24be7
 - etc.
 
 ## Data Validation
@@ -192,3 +192,5 @@ This project is created for educational purposes. Feel free to use and modify as
 ## Author
 
 Created as part of C Programming coursework - Basic to Advanced level.
+I have used multiple AI platform to get this done.This will be a good revision for future me.
+
