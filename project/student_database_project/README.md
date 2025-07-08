@@ -302,5 +302,5 @@ This project is created for educational purposes. Feel free to use and modify as
 ## Author
 Hey👋, I am Gulshan Rana. 
 This project is created as part of C Programming coursework - Basic to Advanced level.
-I have used multiple AI platform to get this done.This will be a good revision for future me.
+I have taken help multiple platform to understand the basics and get this done.This will be a good revision for future me.
 
