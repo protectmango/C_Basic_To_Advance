@@ -1,7 +1,7 @@
 # Student Database Management System - Complete Technical Documentation
 
 **Version**: v24be8g5  
-**Last Updated**: 2025-01-07  
+**Last Updated**: 2025-01-08  
 **Author**: C Programming Coursework - Basic to Advanced Level
 
 ---
@@ -191,6 +191,62 @@ void trim_whitespace(char* str) {
 - Modifies string in-place
 
 **Algorithm**: Two-pointer approach to identify content boundaries.
+
+---
+
+## RECENT FUNCTION IMPROVEMENTS
+
+### Search Function Enhancement
+
+#### Original Issue
+The `search_by_batch_id()` function was displaying all students in a batch when searching for a specific student ID.
+
+#### Solution Implemented
+```c
+void search_by_batch_id(char* batch_id) {
+    // ... file opening code ...
+    
+    while (fread(&student, sizeof(struct st), 1, file) == 1) {
+        if (strcmp(student.batch_id, batch_id) == 0) {  // Exact match
+            display_student(student);
+            found = 1;
+            break;  // Exit after finding the specific student
+        }
+    }
+    
+    // ... rest of function ...
+}
+```
+
+**Key Changes**:
+- Added exact string comparison using `strcmp()`
+- Added `break` statement after finding the match
+- Changed function behavior to show only the specific student
+
+### Edit Function Enhancement
+
+#### Original Issue
+The `edit_student_record()` function didn't provide clear student identification and asked for batch ID directly.
+
+#### Solution Implemented
+```c
+void edit_student_record(char* batch_prefix) {
+    // ... batch lookup code ...
+    
+    // Display students with clear identification
+    for (i = 0; i < count; i++) {
+        printf("%d. %s : %s\n", i + 1, students[i].name, students[i].batch_id);
+    }
+    
+    // ... rest of function ...
+}
+```
+
+**Key Changes**:
+- Function now takes batch prefix as parameter
+- Students displayed in "Name : ID" format
+- Better user interface for student selection
+- More intuitive workflow
 
 ---
 
@@ -725,6 +781,22 @@ if (students == NULL) {
 4. System automatically saves to appropriate batch files
 5. Registry is updated automatically
 
+### Searching by Student ID (Improved)
+1. Select option 5 from menu
+2. Enter exact student ID (e.g., "v24be8g5")
+3. **Result**: Only the specific student with that ID is displayed
+4. **Improvement**: Previously showed all students in batch, now shows only the requested student
+
+### Editing Student Records (Enhanced)
+1. Select option 6 from menu
+2. Enter batch prefix (first 6 characters, e.g., "v24be8")
+3. **Display**: Students shown as "Name : ID" format
+4. **Example**: "1. Gulshan Kumar Rana : v24be8g5"
+5. Select student by number
+6. Choose field to edit
+7. Enter new value
+8. **Improvement**: Better organization and clearer identification of students
+
 ### Deleting a Student
 1. Select option 10 from menu
 2. Enter exact batch ID (e.g., "v24be8g5")
@@ -743,10 +815,13 @@ if (students == NULL) {
 
 ## VERSION HISTORY
 
-### v24be8g5 (2025-01-07)
+### v24be8g5 (2025-01-08)
 **Major Release - Enhanced Functionality**
 - **NEW**: Comprehensive delete operations (single student and entire batch)
 - **NEW**: Enhanced batch registry system for better performance
+- **FIXED**: Search by student ID now shows only the specific student, not the entire batch
+- **IMPROVED**: Edit function now asks for batch prefix first, then displays students as "Name : ID"
+- **IMPROVED**: User interface with clearer prompts and better organization
 - **IMPROVED**: Error handling and data validation throughout the system
 - **IMPROVED**: Safety features with confirmation dialogs for destructive operations
 - **IMPROVED**: Memory management and file operations

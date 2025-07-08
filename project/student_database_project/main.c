@@ -82,17 +82,17 @@ int main() {
             
             case 5: {
                 char batch_id[10];
-                printf("Enter batch ID: ");
+                printf("Enter student ID: ");
                 scanf("%s", batch_id);
                 search_by_batch_id(batch_id);
                 break;
             }
             
             case 6: {
-                char batch_id[10];
-                printf("Enter batch ID of student to edit: ");
-                scanf("%s", batch_id);
-                edit_student_record(batch_id);
+                char batch_prefix[7];
+                printf("Enter batch prefix (first 6 characters, e.g., v24be8): ");
+                scanf("%s", batch_prefix);
+                edit_student_record(batch_prefix);
                 break;
             }
             

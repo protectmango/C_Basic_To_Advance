@@ -91,7 +91,7 @@ gcc -Wall -Wextra -std=c99 -o student_database main.o student_database.o
 2. **Search by join date**: Find students by their joining date
 3. **Search by birth date**: Find students by their birth date
 4. **Search by name**: Find students by their full name
-5. **Search by batch ID**: Display all students in a specific batch
+5. **Search by student ID**: Find specific student by their unique ID
 6. **Edit student record**: Modify existing student information
 7. **Search by marks range**: Find students within a marks range
 8. **Search by assessment status**: Find students by assessment status
@@ -116,16 +116,24 @@ gcc -Wall -Wextra -std=c99 -o student_database main.o student_database.o
 #### Searching Records
 - **By Date**: Enter date in DD MM YYYY format
 - **By Name**: Enter the full name (case-insensitive)
-- **By Batch ID**: Enter batch ID (e.g., v24be8g5)
+- **By Student ID**: Enter exact student ID (e.g., v24be8g5) - Shows only that specific student
 - **By Marks**: Enter minimum and maximum marks
 - **By Status**: Enter "r" for regular or "nr" for non-regular
 
+**Note**: Search by Student ID has been improved to show only the specific student with that exact ID, not all students in the batch.
+
 #### Editing Records
 1. Select option 6 from the menu
-2. Enter the batch ID of the student to edit
-3. Choose the student from the list
+2. Enter the batch prefix (first 6 characters, e.g., v24be8)
+3. Choose the student from the list (displayed as "Name : ID")
 4. Select the field to edit
 5. Enter the new value
+
+**Improvements in Edit Function**:
+- Now asks for batch prefix first for better organization
+- Displays students in clear "Name : ID" format (e.g., "Gulshan Kumar Rana : v24be8g5")
+- Makes it easier to identify which student to edit
+- More intuitive user interface
 
 #### Deleting Records
 **Delete Single Student:**
@@ -196,10 +204,12 @@ The program includes validation for:
 ## Version Information
 
 **Current Version**: v24be8g5
-**Release Date**: 2025-01-07
+**Release Date**: 2025-01-08
 **Key Updates in v24be8g5**:
 - Enhanced batch registry system for better performance
 - Added comprehensive delete operations (single student and entire batch)
+- **FIXED**: Search by student ID now shows only the specific student (not entire batch)
+- **IMPROVED**: Edit function now asks for batch prefix first and displays "Name : ID" format
 - Improved error handling and data validation
 - Enhanced safety features with confirmation dialogs
 - Better memory management and file operations

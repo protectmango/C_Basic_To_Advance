@@ -419,13 +419,13 @@ void search_by_name(char* name) {
 
 // Function to search by batch ID
 void search_by_batch_id(char* batch_id) {
-    printf("\n--- Searching by Batch ID: %s ---\n", batch_id);
+    printf("\n--- Searching by Student ID: %s ---\n", batch_id);
     
     char* filename = get_batch_filename(batch_id);
     FILE* file = fopen(filename, "rb");
     
     if (file == NULL) {
-        printf("No records found for batch %s\n", batch_id);
+        printf("No records found for batch containing ID %s\n", batch_id);
         return;
     }
     
@@ -433,21 +433,46 @@ void search_by_batch_id(char* batch_id) {
     int found = 0;
     
     while (fread(&student, sizeof(struct st), 1, file) == 1) {
-        display_student(student);
-        found = 1;
+        if (strcmp(student.batch_id, batch_id) == 0) {
+            display_student(student);
+            found = 1;
+            break;
+        }
     }
     
     fclose(file);
     
     if (!found) {
-        printf("No students found in batch %s\n", batch_id);
+        printf("No student found with ID %s\n", batch_id);
     }
 }
 
 // Function to edit student record
-void edit_student_record(char* batch_id) {
+void edit_student_record(char* batch_prefix) {
+    
+    FILE* file = fopen("student_batch.txt", "r");
+    if (file == NULL) {
+        printf("No registered batches found!\n");
+        return;
+    }
+    
+    char batch_id[10];
+    int found = 0;
+    while (fscanf(file, "%s", batch_id) != EOF) {
+        if (strncmp(batch_id, batch_prefix, strlen(batch_prefix)) == 0) {
+            found = 1;
+            break;
+        }
+    }
+    fclose(file);
+    
+    if (!found) {
+        printf("No batch found with prefix %s\n", batch_prefix);
+        return;
+    }
+    
     char* filename = get_batch_filename(batch_id);
-    FILE* file = fopen(filename, "rb");
+    file = fopen(filename, "rb");
     
     if (file == NULL) {
         printf("No records found for batch %s\n", batch_id);
@@ -468,11 +493,11 @@ void edit_student_record(char* batch_id) {
         return;
     }
     
-    // Display all students in the batch
+    // Display all students in the batch with IDs
     printf("\n--- Students in batch %s ---\n", batch_id);
     int i;
     for (i = 0; i < count; i++) {
-        printf("%d. %s\n", i + 1, students[i].name);
+        printf("%d. %s : %s\n", i + 1, students[i].name, students[i].batch_id);
     }
     
     int choice;
@@ -798,7 +823,7 @@ void display_menu() {
     printf("2. Search by join date\n");
     printf("3. Search by birth date\n");
     printf("4. Search by name\n");
-    printf("5. Search by batch ID\n");
+    printf("5. Search by student ID\n");
     printf("6. Edit student record\n");
     printf("7. Search by marks range\n");
     printf("8. Search by assessment status\n");
