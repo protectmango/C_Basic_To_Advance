@@ -40,22 +40,22 @@ The Student Database Management System is a C-based application designed to mana
 
 ### System Architecture
 ```
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
+┌─────────────────┐    ┌──────────────────┐    ┌──────────────────┐
 │    main.c       │    │student_database.h│    │student_database.c│
-│                 │    │                 │    │                 │
-│ • Menu System   │────│ • Structures    │────│ • Core Functions│
-│ • User Input    │    │ • Declarations  │    │ • File I/O      │
-│ • Flow Control  │    │ • Constants     │    │ • Algorithms    │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
+│                 │    │                  │    │                  │
+│ • Menu System   │────│ • Structures     │────│ • Core Functions │
+│ • User Input    │    │ • Declarations   │    │ • File I/O       │
+│ • Flow Control  │    │ • Constants      │    │ • Algorithms     │
+└─────────────────┘    └──────────────────┘    └──────────────────┘
                                 │
                                 ▼
-                       ┌─────────────────┐
-                       │ student_batch.txt│
-                       │                 │
-                       │ • Batch Registry│
-                       │ • Centralized   │
-                       │   Tracking      │
-                       └─────────────────┘
+                       ┌───────────────────┐
+                       │ student_batch.txt │
+                       │                   │
+                       │ • Batch Registry  │
+                       │ • Centralized     │
+                       │   Tracking        │
+                       └───────────────────┘
 ```
 
 ### Design Principles
