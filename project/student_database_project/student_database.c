@@ -329,7 +329,7 @@ void search_by_join_date(int day, int month, int year) {
     struct st student;
     int found = 0;
     
-    // Get all .dat files dynamically
+    // Get all .txt files dynamically
     char batch_files[50][50];
     int file_count;
     get_all_dat_files(batch_files, &file_count);
@@ -361,7 +361,7 @@ void search_by_birth_date(int day, int month, int year) {
     struct st student;
     int found = 0;
     
-    // Get all .dat files dynamically
+    // Get all .txt files dynamically
     char batch_files[50][50];
     int file_count;
     get_all_dat_files(batch_files, &file_count);
@@ -576,7 +576,7 @@ void search_by_marks_range(float min_marks, float max_marks) {
     struct st student;
     int found = 0;
     
-    // Get all .dat files dynamically
+    // Get all .txt files dynamically
     char batch_files[50][50];
     int file_count;
     get_all_dat_files(batch_files, &file_count);
@@ -608,7 +608,7 @@ void search_by_assessment_status(char* status) {
     struct st student;
     int found = 0;
     
-    // Get all .dat files dynamically
+    // Get all .txt files dynamically
     char batch_files[50][50];
     int file_count;
     get_all_dat_files(batch_files, &file_count);
