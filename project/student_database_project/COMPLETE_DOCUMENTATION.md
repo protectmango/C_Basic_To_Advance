@@ -235,7 +235,7 @@ void edit_student_record(char* batch_prefix) {
     
     // Display students with clear identification
     for (i = 0; i < count; i++) {
-        printf("%d. %s : %s\n", i + 1, students[i].name, students[i].batch_id);
+        printf("%d. %s : %s\n", i + 1, students[i].batch_id, students[i].name);
     }
     
     // ... rest of function ...
@@ -244,7 +244,7 @@ void edit_student_record(char* batch_prefix) {
 
 **Key Changes**:
 - Function now takes batch prefix as parameter
-- Students displayed in "Name : ID" format
+- Students displayed in "ID : Name" format
 - Better user interface for student selection
 - More intuitive workflow
 
@@ -790,12 +790,26 @@ if (students == NULL) {
 ### Editing Student Records (Enhanced)
 1. Select option 6 from menu
 2. Enter batch prefix (first 6 characters, e.g., "v24be8")
-3. **Display**: Students shown as "Name : ID" format
-4. **Example**: "1. Gulshan Kumar Rana : v24be8g5"
+3. **Display**: Students shown as "ID : Name" format
+4. **Example**: "1. v24be8g5 : Gulshan Kumar Rana"
 5. Select student by number
 6. Choose field to edit
 7. Enter new value
 8. **Improvement**: Better organization and clearer identification of students
+
+### Displaying Records (Enhanced)
+1. Select option 9 from menu
+2. **Choose display type**:
+   - Enter specific batch prefix (e.g., "v24be8")
+   - Enter "all" to display all records
+3. **Features**:
+   - Professional formatted output with Unicode box characters
+   - Student counter for each batch
+   - Total count summary
+   - Clear visual separation between batches
+   - Numbered student listing
+4. **Case-insensitive input**: "all", "ALL", "All" all work
+5. **Improvement**: User can now choose between viewing specific batch or all records
 
 ### Deleting a Student
 1. Select option 10 from menu
@@ -820,7 +834,9 @@ if (students == NULL) {
 - **NEW**: Comprehensive delete operations (single student and entire batch)
 - **NEW**: Enhanced batch registry system for better performance
 - **FIXED**: Search by student ID now shows only the specific student, not the entire batch
-- **IMPROVED**: Edit function now asks for batch prefix first, then displays students as "Name : ID"
+- **IMPROVED**: Edit function now asks for batch prefix first, then displays students as "ID : Name"
+- **ENHANCED**: Display records now allows batch selection (specific batch or all records)
+- **IMPROVED**: Professional formatting with Unicode box characters throughout the system
 - **IMPROVED**: User interface with clearer prompts and better organization
 - **IMPROVED**: Error handling and data validation throughout the system
 - **IMPROVED**: Safety features with confirmation dialogs for destructive operations
