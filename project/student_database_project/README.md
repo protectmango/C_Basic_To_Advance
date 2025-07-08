@@ -2,6 +2,41 @@
 
 A comprehensive C program for managing student records with dynamic memory allocation, file operations, and various search functionalities.
 
+## 🎬 Demo Video
+
+**Watch the complete demonstration of the Student Database Management System:**
+
+[![Demo Video](https://img.shields.io/badge/🎥_Watch_Demo-Google_Drive-blue?style=for-the-badge&logo=googledrive)](https://drive.google.com/file/d/1jEDYunQDI8niG00F-GcaM6MtDZPDfCcr/view?usp=sharing)
+
+> 📺 **[Watch Demo](https://drive.google.com/file/d/1jEDYunQDI8niG00F-GcaM6MtDZPDfCcr/view?usp=sharing)** - See all features in action!
+
+---
+
+## 🆕 Recent Changes & Improvements
+
+### What's New in Latest Updates:
+
+| 🔍 **Search Enhancement** | Search by Student ID now shows only the specific student (not entire batch) |
+|:---:|:---|
+| **✏️ Edit Improvements** | Edit function now asks for batch prefix first and displays "ID : Name" format |
+| **📋 Display Enhancement** | Display records now allows batch selection (specific batch or all records) |
+| **🗂️ Registry System** | Enhanced batch registry system for better performance |
+| **🗑️ Delete Operations** | Added comprehensive delete operations (single student and entire batch) |
+| **💎 UI Improvements** | Professional formatting with Unicode box characters throughout |
+| **⚠️ Error Handling** | Improved error handling and data validation |
+| **🛡️ Safety Features** | Enhanced safety features with confirmation dialogs |
+| **📖 Documentation** | Updated documentation with detailed technical specifications |
+
+### 📊 Recent Development Activity:
+- ✅ **Latest**: Modified comments and code cleanup
+- 🔧 **Fixed**: Search student by ID and edit student by ID functionality
+- 📊 **Improved**: Database structure and dummy data handling
+- 📚 **Enhanced**: Text formatting and documentation updates
+- 🧹 **Cleaned**: Removal of temporary files and ID corrections
+- 🗑️ **Optimized**: Deletion of junk files and project cleanup
+
+---
+
 ## Features
 
 ### Core Functionality
@@ -95,7 +130,7 @@ gcc -Wall -Wextra -std=c99 -o student_database main.o student_database.o
 6. **Edit student record**: Modify existing student information
 7. **Search by marks range**: Find students within a marks range
 8. **Search by assessment status**: Find students by assessment status
-9. **Display all records**: Show all stored student records
+9. **Display records**: Show student records (specific batch or all records)
 10. **Delete student by ID**: Remove a specific student record
 11. **Delete entire batch**: Remove all students from a batch
 12. **Exit**: Quit the program
@@ -125,13 +160,13 @@ gcc -Wall -Wextra -std=c99 -o student_database main.o student_database.o
 #### Editing Records
 1. Select option 6 from the menu
 2. Enter the batch prefix (first 6 characters, e.g., v24be8)
-3. Choose the student from the list (displayed as "Name : ID")
+3. Choose the student from the list (displayed as "ID : Name")
 4. Select the field to edit
 5. Enter the new value
 
 **Improvements in Edit Function**:
 - Now asks for batch prefix first for better organization
-- Displays students in clear "Name : ID" format (e.g., "Gulshan Kumar Rana : v24be8g5")
+- Displays students in clear "ID : Name" format (e.g., "v24be8g5 : Gulshan Kumar Rana")
 - Makes it easier to identify which student to edit
 - More intuitive user interface
 
@@ -147,6 +182,25 @@ gcc -Wall -Wextra -std=c99 -o student_database main.o student_database.o
 2. Enter the batch prefix (first 6 characters, e.g., v24be8)
 3. Review the list of all students in the batch
 4. Confirm deletion (y/n)
+
+#### Displaying Records
+**Enhanced Display Options:**
+1. Select option 9 from the menu
+2. Choose display type:
+   - **Specific Batch**: Enter batch prefix (e.g., "v24be8")
+   - **All Records**: Enter "all" to display all student records
+
+**Display Features**:
+- Professional formatted output with headers
+- Student counter for each batch
+- Total count summary
+- Clear batch separation
+- Numbered student listing
+
+**Examples**:
+- Enter "v24be8" to show only students from batch v24be8
+- Enter "all" to display all students from all batches
+- Case-insensitive input ("ALL", "all", "All" all work)
 
 ## File Storage
 
@@ -205,15 +259,29 @@ The program includes validation for:
 
 **Current Version**: v24be8g5
 **Release Date**: 2025-01-08
-**Key Updates in v24be8g5**:
-- Enhanced batch registry system for better performance
-- Added comprehensive delete operations (single student and entire batch)
-- **FIXED**: Search by student ID now shows only the specific student (not entire batch)
-- **IMPROVED**: Edit function now asks for batch prefix first and displays "Name : ID" format
-- Improved error handling and data validation
-- Enhanced safety features with confirmation dialogs
-- Better memory management and file operations
-- Updated documentation with detailed technical specifications
+
+### 🚀 Latest Updates (January 2025)
+
+#### Recent Commits:
+- **✅ Modified comments** (Latest - HEAD)
+- **🔧 Fixed search student by ID and edit student by ID** 
+- **📊 Database dummy changes and improvements**
+- **📚 Text and documentation updates**
+- **🧹 Removal of temporary files and corrections**
+- **🗑️ Deletion of junk files and cleanup**
+
+#### Key Features in v24be8g5:
+- **🔍 FIXED**: Search by student ID now shows only the specific student (not entire batch)
+- **✏️ IMPROVED**: Edit function now asks for batch prefix first and displays "ID : Name" format
+- **📋 ENHANCED**: Display records now allows batch selection (specific batch or all records)
+- **🗂️ Enhanced batch registry system** for better performance
+- **🗑️ Added comprehensive delete operations** (single student and entire batch)
+- **💎 Professional formatting** with Unicode box characters throughout the system
+- **⚠️ Improved error handling** and data validation
+- **🛡️ Enhanced safety features** with confirmation dialogs
+- **🧠 Better memory management** and file operations
+- **📖 Updated documentation** with detailed technical specifications
+- **🎬 Added demo video** for better user understanding
 
 ## Future Enhancements
 
