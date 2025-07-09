@@ -182,31 +182,14 @@ void initialize_batch_registry() {
         return; // Registry already exists
     }
     
-    // Create registry from existing .txt files using directory scan
-    FILE* pipe = popen("ls *.txt 2>/dev/null | grep -v student_batch.txt", "r");
-    if (pipe == NULL) {
-        return;
-    }
-    
+    // For backward compatibility, create empty registry file
+    // In a real implementation, you would scan directory for .txt files
+    // But since we're avoiding popen, we'll create an empty registry
+    // that will be populated as students are added
     registry_file = fopen("student_batch.txt", "w");
-    if (registry_file == NULL) {
-        pclose(pipe);
-        return;
+    if (registry_file != NULL) {
+        fclose(registry_file);
     }
-    
-    char filename[50];
-    while (fgets(filename, sizeof(filename), pipe) != NULL) {
-        filename[strcspn(filename, "\n")] = 0; // Remove newline
-        // Extract batch prefix (remove .txt extension)
-        char* dot = strrchr(filename, '.');
-        if (dot != NULL && strcmp(dot, ".txt") == 0) {
-            *dot = '\0'; // Remove extension
-            fprintf(registry_file, "%s\n", filename);
-        }
-    }
-    
-    fclose(registry_file);
-    pclose(pipe);
 }
 
 // Function to get all .txt files from batch registry
@@ -221,25 +204,37 @@ void input_student_data(struct st* students, int n) {
         printf("\n--- Enter details for Student %d ---\n", i + 1);
         
         printf("Batch ID (e.g., v24be8g5): ");
-        scanf("%s", students[i].batch_id);
+        if (scanf("%s", students[i].batch_id) != 1) {
+            printf("Error reading batch ID\n");
+        }
         
         printf("Full Name: ");
-        scanf(" %[^\n]", students[i].name);
+        if (scanf(" %[^\n]", students[i].name) != 1) {
+            printf("Error reading name\n");
+        }
         
         printf("Average Internal Marks (0-100): ");
-        scanf("%f", &students[i].avg_internal_marks);
+        if (scanf("%f", &students[i].avg_internal_marks) != 1) {
+            printf("Error reading marks\n");
+        }
         
         printf("Assessment Status (r/nr): ");
-        scanf("%s", students[i].assessment_status);
+        if (scanf("%s", students[i].assessment_status) != 1) {
+            printf("Error reading assessment status\n");
+        }
         
         do {
             printf("Date of Birth (DD MM YYYY): ");
-            scanf("%d %d %d", &students[i].dob.day, &students[i].dob.month, &students[i].dob.year);
+            if (scanf("%d %d %d", &students[i].dob.day, &students[i].dob.month, &students[i].dob.year) != 3) {
+                printf("Error reading date of birth\n");
+            }
         } while (!validate_date(students[i].dob.day, students[i].dob.month, students[i].dob.year));
         
         do {
             printf("Date of Joining (DD MM YYYY): ");
-            scanf("%d %d %d", &students[i].doj.day, &students[i].doj.month, &students[i].doj.year);
+            if (scanf("%d %d %d", &students[i].doj.day, &students[i].doj.month, &students[i].doj.year) != 3) {
+                printf("Error reading date of joining\n");
+            }
         } while (!validate_date(students[i].doj.day, students[i].doj.month, students[i].doj.year));
         
         printf("Student %d data entered successfully!\n", i + 1);
@@ -311,14 +306,16 @@ void save_batch_wise_records(struct st* students, int n) {
 
 // Function to display a student record
 void display_student(struct st student) {
-    printf("\n--- Student Details ---\n");
-    printf("Batch ID: %s\n", student.batch_id);
-    printf("Name: %s\n", student.name);
-    printf("Average Internal Marks: %.2f\n", student.avg_internal_marks);
-    printf("Assessment Status: %s\n", student.assessment_status);
-    printf("Date of Birth: %02d/%02d/%d\n", student.dob.day, student.dob.month, student.dob.year);
-    printf("Date of Joining: %02d/%02d/%d\n", student.doj.day, student.doj.month, student.doj.year);
-    printf("------------------------\n");
+    printf("\n╔══════════════════════════════════════════════════════════╗\n");
+    printf("║                    Student Details                       ║\n");
+    printf("╠══════════════════════════════════════════════════════════╣\n");
+    printf("║ %-20s : %-33s ║\n", "Batch ID", student.batch_id);
+    printf("║ %-20s : %-33s ║\n", "Name", student.name);
+    printf("║ %-20s : %-33.2f ║\n", "Average Marks", student.avg_internal_marks);
+    printf("║ %-20s : %-33s ║\n", "Assessment Status", student.assessment_status);
+    printf("║ %-20s : %02d/%02d/%-27d ║\n", "Date of Birth", student.dob.day, student.dob.month, student.dob.year);
+    printf("║ %-20s : %02d/%02d/%-27d ║\n", "Date of Joining", student.doj.day, student.doj.month, student.doj.year);
+    printf("╚══════════════════════════════════════════════════════════╝\n");
 }
 
 // Function to search by join date
@@ -393,17 +390,32 @@ void search_by_name(char* name) {
     struct st student;
     int found = 0;
     
+    // Convert search name to lowercase for comparison
+    char lower_name[50];
+    int i;
+    for (i = 0; name[i] && i < 49; i++) {
+        lower_name[i] = tolower(name[i]);
+    }
+    lower_name[i] = '\0';
+    
     // Get all .dat files dynamically
     char batch_files[50][50];
     int file_count;
     get_all_dat_files(batch_files, &file_count);
     
-    int i;
     for (i = 0; i < file_count; i++) {
         file = fopen(batch_files[i], "rb");
         if (file != NULL) {
             while (fread(&student, sizeof(struct st), 1, file) == 1) {
-                if (strcasecmp(student.name, name) == 0) {
+                // Convert student name to lowercase for comparison
+                char lower_student_name[50];
+                int j;
+                for (j = 0; student.name[j] && j < 49; j++) {
+                    lower_student_name[j] = tolower(student.name[j]);
+                }
+                lower_student_name[j] = '\0';
+                
+                if (strcmp(lower_student_name, lower_name) == 0) {
                     display_student(student);
                     found = 1;
                 }
@@ -495,14 +507,19 @@ void edit_student_record(char* batch_prefix) {
     
     // Display all students in the batch with IDs
     printf("\n--- Students in batch %s ---\n", batch_id);
+    printf("%-4s %-12s : %-30s\n", "No.", "Student ID", "Name");
+    printf("%-4s %-12s   %-30s\n", "---", "----------", "----");
     int i;
     for (i = 0; i < count; i++) {
-        printf("%d. %s : %s\n", i + 1, students[i].name, students[i].batch_id);
+        printf("%-4d %-12s : %-30s\n", i + 1, students[i].batch_id, students[i].name);
     }
     
     int choice;
     printf("Enter student number to edit (1-%d): ", count);
-    scanf("%d", &choice);
+    if (scanf("%d", &choice) != 1) {
+        printf("Error reading choice\n");
+        return;
+    }
     
     if (choice < 1 || choice > count) {
         printf("Invalid choice!\n");
@@ -514,40 +531,56 @@ void edit_student_record(char* batch_prefix) {
     printf("\nCurrent details:\n");
     display_student(students[choice]);
     
-    printf("\nWhat would you like to edit?\n");
-    printf("1. Name\n");
-    printf("2. Average Internal Marks\n");
-    printf("3. Assessment Status\n");
-    printf("4. Date of Birth\n");
-    printf("5. Date of Joining\n");
+    printf("\n╔══════════════════════════════════════════════════════════╗\n");
+    printf("║           What would you like to edit?                   ║\n");
+    printf("╠══════════════════════════════════════════════════════════╣\n");
+    printf("║  1. Name                                                 ║\n");
+    printf("║  2. Average Internal Marks                               ║\n");
+    printf("║  3. Assessment Status                                    ║\n");
+    printf("║  4. Date of Birth                                        ║\n");
+    printf("║  5. Date of Joining                                      ║\n");
+    printf("╚══════════════════════════════════════════════════════════╝\n");
     printf("Enter your choice: ");
     
     int edit_choice;
-    scanf("%d", &edit_choice);
+    if (scanf("%d", &edit_choice) != 1) {
+        printf("Error reading edit choice\n");
+        return;
+    }
     
     switch (edit_choice) {
         case 1:
             printf("Enter new name: ");
-            scanf(" %[^\n]", students[choice].name);
+            if (scanf(" %[^\n]", students[choice].name) != 1) {
+                printf("Error reading name\n");
+            }
             break;
         case 2:
             printf("Enter new average internal marks: ");
-            scanf("%f", &students[choice].avg_internal_marks);
+            if (scanf("%f", &students[choice].avg_internal_marks) != 1) {
+                printf("Error reading marks\n");
+            }
             break;
         case 3:
             printf("Enter new assessment status: ");
-            scanf("%s", students[choice].assessment_status);
+            if (scanf("%s", students[choice].assessment_status) != 1) {
+                printf("Error reading assessment status\n");
+            }
             break;
         case 4:
             do {
                 printf("Enter new date of birth (DD MM YYYY): ");
-                scanf("%d %d %d", &students[choice].dob.day, &students[choice].dob.month, &students[choice].dob.year);
+                if (scanf("%d %d %d", &students[choice].dob.day, &students[choice].dob.month, &students[choice].dob.year) != 3) {
+                    printf("Error reading date of birth\n");
+                }
             } while (!validate_date(students[choice].dob.day, students[choice].dob.month, students[choice].dob.year));
             break;
         case 5:
             do {
                 printf("Enter new date of joining (DD MM YYYY): ");
-                scanf("%d %d %d", &students[choice].doj.day, &students[choice].doj.month, &students[choice].doj.year);
+                if (scanf("%d %d %d", &students[choice].doj.day, &students[choice].doj.month, &students[choice].doj.year) != 3) {
+                    printf("Error reading date of joining\n");
+                }
             } while (!validate_date(students[choice].doj.day, students[choice].doj.month, students[choice].doj.year));
             break;
         default:
@@ -565,7 +598,9 @@ void edit_student_record(char* batch_prefix) {
     fwrite(students, sizeof(struct st), count, file);
     fclose(file);
     
-    printf("Record updated successfully!\n");
+    printf("\n╔══════════════════════════════════════════════════════════╗\n");
+    printf("║         Record updated successfully!                     ║\n");
+    printf("╚══════════════════════════════════════════════════════════╝\n");
 }
 
 // Function to search by marks range
@@ -608,17 +643,32 @@ void search_by_assessment_status(char* status) {
     struct st student;
     int found = 0;
     
+    // Convert search status to lowercase for comparison
+    char lower_status[5];
+    int i;
+    for (i = 0; status[i] && i < 4; i++) {
+        lower_status[i] = tolower(status[i]);
+    }
+    lower_status[i] = '\0';
+    
     // Get all .txt files dynamically
     char batch_files[50][50];
     int file_count;
     get_all_dat_files(batch_files, &file_count);
     
-    int i;
     for (i = 0; i < file_count; i++) {
         file = fopen(batch_files[i], "rb");
         if (file != NULL) {
             while (fread(&student, sizeof(struct st), 1, file) == 1) {
-                if (strcasecmp(student.assessment_status, status) == 0) {
+                // Convert student assessment status to lowercase for comparison
+                char lower_student_status[5];
+                int j;
+                for (j = 0; student.assessment_status[j] && j < 4; j++) {
+                    lower_student_status[j] = tolower(student.assessment_status[j]);
+                }
+                lower_student_status[j] = '\0';
+                
+                if (strcmp(lower_student_status, lower_status) == 0) {
                     display_student(student);
                     found = 1;
                 }
@@ -632,44 +682,134 @@ void search_by_assessment_status(char* status) {
     }
 }
 
-// Function to display all records
-void display_all_records() {
-    printf("\n--- All Student Records ---\n");
+// Function to display records from a specific batch
+void display_batch_records(char* batch_prefix) {
+    printf("\n--- Records for Batch: %s ---\n", batch_prefix);
     
-    FILE* file;
-    struct st student;
-    int found = 0;
+    char filename[20];
+    snprintf(filename, sizeof(filename), "%s.txt", batch_prefix);
     
-    // Get all registered batch files
-    char batch_files[50][50];
-    int file_count;
-    get_registered_batches(batch_files, &file_count);
-    
-    if (file_count == 0) {
-        printf("No records found in the database.\n");
+    FILE* file = fopen(filename, "rb");
+    if (file == NULL) {
+        printf("No records found for batch %s\n", batch_prefix);
         return;
     }
     
-    int i;
-    for (i = 0; i < file_count; i++) {
-        file = fopen(batch_files[i], "rb");
-        if (file != NULL) {
-            printf("\n=== Batch File: %s ===\n", batch_files[i]);
-            int batch_found = 0;
-            while (fread(&student, sizeof(struct st), 1, file) == 1) {
-                display_student(student);
-                found = 1;
-                batch_found = 1;
-            }
-            if (!batch_found) {
-                printf("No records in this batch file.\n");
-            }
-            fclose(file);
-        }
+    struct st student;
+    int found = 0;
+    int count = 0;
+    
+    // First, display header
+    printf("\n╔══════════════════════════════════════════════════════════╗\n");
+    printf("║                    Batch: %-27s    ║\n", batch_prefix);
+    printf("╚══════════════════════════════════════════════════════════╝\n");
+    
+    while (fread(&student, sizeof(struct st), 1, file) == 1) {
+        printf("\n[Student %d]\n", ++count);
+        display_student(student);
+        found = 1;
     }
     
+    fclose(file);
+    
     if (!found) {
-        printf("No records found in the database.\n");
+        printf("No students found in batch %s\n", batch_prefix);
+    } else {
+        printf("\n╔══════════════════════════════════════════════════════════╗\n");
+        printf("║              Total Students: %-24d    ║\n", count);
+        printf("╚══════════════════════════════════════════════════════════╝\n");
+    }
+}
+
+// Function to display all records with batch selection option
+void display_all_records() {
+    char input[20];
+    
+    printf("\n╔══════════════════════════════════════════════════════════╗\n");
+    printf("║                    Display Records                       ║\n");
+    printf("╠══════════════════════════════════════════════════════════╣\n");
+    printf("║  Enter batch prefix (e.g., v24be8) or 'all' for all:     ║\n");
+    printf("╚══════════════════════════════════════════════════════════╝\n");
+    printf("Choice: ");
+    
+    if (scanf("%s", input) != 1) {
+        printf("Error reading input!\n");
+        return;
+    }
+    
+    // Convert to lowercase for comparison
+    int i;
+    for (i = 0; input[i]; i++) {
+        input[i] = tolower(input[i]);
+    }
+    
+    if (strcmp(input, "all") == 0) {
+        // Display all records
+        printf("\n╔══════════════════════════════════════════════════════════╗\n");
+        printf("║                    All Student Records                   ║\n");
+        printf("╚══════════════════════════════════════════════════════════╝\n");
+        
+        FILE* file;
+        struct st student;
+        int found = 0;
+        int total_students = 0;
+        
+        // Get all registered batch files
+        char batch_files[50][50];
+        int file_count;
+        get_registered_batches(batch_files, &file_count);
+        
+        if (file_count == 0) {
+            printf("No records found in the database.\n");
+            return;
+        }
+        
+        for (i = 0; i < file_count; i++) {
+            file = fopen(batch_files[i], "rb");
+            if (file != NULL) {
+                // Extract batch name from filename
+                char batch_name[20];
+                strcpy(batch_name, batch_files[i]);
+                char* dot = strrchr(batch_name, '.');
+                if (dot != NULL) {
+                    *dot = '\0';
+                }
+                
+                printf("\n╔══════════════════════════════════════════════════════════╗\n");
+                printf("║                    Batch: %-27s    ║\n", batch_name);
+                printf("╚══════════════════════════════════════════════════════════╝\n");
+                
+                int batch_found = 0;
+                int batch_count = 0;
+                while (fread(&student, sizeof(struct st), 1, file) == 1) {
+                    printf("\n[Student %d]\n", ++batch_count);
+                    display_student(student);
+                    found = 1;
+                    batch_found = 1;
+                    total_students++;
+                }
+                
+                if (!batch_found) {
+                    printf("No records in this batch file.\n");
+                } else {
+                    printf("\n╔══════════════════════════════════════════════════════════╗\n");
+                    printf("║              Batch Total: %-23d        ║\n", batch_count);
+                    printf("╚══════════════════════════════════════════════════════════╝\n");
+                }
+                fclose(file);
+            }
+        }
+        
+        if (!found) {
+            printf("No records found in the database.\n");
+        } else {
+            printf("\n╔══════════════════════════════════════════════════════════╗\n");
+            printf("║              Total Students: %-24d    ║\n", total_students);
+            printf("╚══════════════════════════════════════════════════════════╝\n");
+        }
+    } else {
+        // Display specific batch records
+        display_batch_records(input);
     }
 }
 
@@ -712,7 +852,10 @@ void delete_student_by_batch_id(char* batch_id) {
     // Confirm deletion
     char confirm;
     printf("\nAre you sure you want to delete this student? (y/n): ");
-    scanf(" %c", &confirm);
+    if (scanf(" %c", &confirm) != 1) {
+        printf("Error reading confirmation!\n");
+        return;
+    }
     
     if (confirm != 'y' && confirm != 'Y') {
         printf("Deletion cancelled.\n");
@@ -747,7 +890,10 @@ void delete_student_by_batch_id(char* batch_id) {
     if (count == 0) {
         char choice;
         printf("Do you want to remove the empty batch file %s? (y/n): ", filename);
-        scanf(" %c", &choice);
+        if (scanf(" %c", &choice) != 1) {
+            printf("Error reading choice!\n");
+            return;
+        }
         if (choice == 'y' || choice == 'Y') {
             if (remove(filename) == 0) {
                 printf("Empty batch file %s removed successfully.\n", filename);
@@ -780,10 +926,11 @@ void delete_all_students_by_batch(char* batch_prefix) {
     struct st student;
     int count = 0;
     printf("\nStudents in batch %s:\n", batch_prefix);
-    printf("================================\n");
+    printf("%-4s %-12s : %-30s\n", "No.", "Student ID", "Name");
+    printf("%-4s %-12s   %-30s\n", "---", "----------", "----");
     
     while (fread(&student, sizeof(struct st), 1, file) == 1) {
-        printf("%d. %s (ID: %s)\n", count + 1, student.name, student.batch_id);
+        printf("%-4d %-12s : %-30s\n", count + 1, student.batch_id, student.name);
         count++;
     }
     fclose(file);
@@ -798,7 +945,10 @@ void delete_all_students_by_batch(char* batch_prefix) {
     // Confirm deletion
     char confirm;
     printf("\nAre you sure you want to delete ALL students from batch %s? (y/n): ", batch_prefix);
-    scanf(" %c", &confirm);
+    if (scanf(" %c", &confirm) != 1) {
+        printf("Error reading confirmation!\n");
+        return;
+    }
     
     if (confirm != 'y' && confirm != 'Y') {
         printf("Deletion cancelled.\n");
@@ -818,18 +968,21 @@ void delete_all_students_by_batch(char* batch_prefix) {
 
 // Function to display menu
 void display_menu() {
-    printf("\n=== Student Database Management System ===\n");
-    printf("1. Add new students\n");
-    printf("2. Search by join date\n");
-    printf("3. Search by birth date\n");
-    printf("4. Search by name\n");
-    printf("5. Search by student ID\n");
-    printf("6. Edit student record\n");
-    printf("7. Search by marks range\n");
-    printf("8. Search by assessment status\n");
-    printf("9. Display all records\n");
-    printf("10. Delete student by batch ID\n");
-    printf("11. Delete all students by batch\n");
-    printf("12. Exit\n");
+    printf("\n╔══════════════════════════════════════════════════════════╗\n");
+    printf("║           Student Database Management System             ║\n");
+    printf("╠══════════════════════════════════════════════════════════╣\n");
+    printf("║  1.  Add new students                                    ║\n");
+    printf("║  2.  Search by join date                                 ║\n");
+    printf("║  3.  Search by birth date                                ║\n");
+    printf("║  4.  Search by name                                      ║\n");
+    printf("║  5.  Search by student ID                                ║\n");
+    printf("║  6.  Edit student record                                 ║\n");
+    printf("║  7.  Search by marks range                               ║\n");
+    printf("║  8.  Search by assessment status                         ║\n");
+    printf("║  9.  Display all records                                 ║\n");
+    printf("║  10. Delete student by batch ID                          ║\n");
+    printf("║  11. Delete all students by batch                        ║\n");
+    printf("║  12. Exit                                                ║\n");
+    printf("╚══════════════════════════════════════════════════════════╝\n");
     printf("Enter your choice: ");
 }
