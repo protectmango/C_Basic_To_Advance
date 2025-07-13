@@ -96,7 +96,8 @@ Used in preprocessor conditions:
 ```sh
 gcc -E test.c -o test.i
 ```
-   (Examine `test.i` to see how `#define` and `#include` are processed.)
+>[!Tip]
+>Examine `test.i` to see how `#define` and `#include` are processed.
 
 2. Test Stringizing:
 ```c   
