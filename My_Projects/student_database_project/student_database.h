@@ -36,6 +36,7 @@ void edit_student_record(char* batch_id);
 void search_by_marks_range(float min_marks, float max_marks);
 void search_by_assessment_status(char* status);
 void display_all_records();
+void display_batch_records(char* batch_prefix);
 void display_student(struct st student);
 void display_menu();
 int validate_date(int day, int month, int year);
