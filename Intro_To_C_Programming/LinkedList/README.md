@@ -36,3 +36,17 @@ graph LR
     node2_next --> node3_data
     node3_next --> null_ptr
 ```
+
+## Create a Node 
+
+```c
+struct SLL
+{
+    int rollno;
+    char name[30];
+    double marks;
+
+    struct SLL *next;
+    
+};
+```
