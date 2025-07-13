@@ -27,26 +27,21 @@ int main(int argc, char **argv)
 		return 1;
 	}
 
-	char s[1024];
-	while(fgets(s, sizeof(s), file))
+	char ch;
+	int count =0;
+
+
+	while((ch=fgetc(file))!=EOF)
 	{
-		for(int i = 0, wordlen = 0 ; i<= strlen(s); i++)
+		if(ch==' '||ch=='\n')
 		{
-			if(s[i]!=' '&&s[i]!='\n')
-			{
-				wordlen++;
-			}
-
-
-			if(s[i]==' '||s[i]=='\n')
-			{
-				printf("%d ", wordlen);
-				wordlen = 0;
-			}
+			printf("%d ", count);
+			count=0;
 		}
+		else
+		count++;
 	}
 		
-	printf("\n");
 
 	fclose(file);
 

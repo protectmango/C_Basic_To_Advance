@@ -29,7 +29,7 @@ int main(int argc, char **argv)
 		printf("%s not found.\n", argv[2]);
 	}
 
-	char ch, ch1 , str[1024];
+	char ch, ch1 ;
 	while(((ch = fgetc(file1))!=EOF)&&((ch1 = fgetc(file2))!= EOF))
 	{
 		if(ch==' ')

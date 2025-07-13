@@ -28,16 +28,12 @@ int main(int argc , char **argv)
 
 
 	char c;
-	long pos;
 	while((c = fgetc(file) )!= EOF)
 	{
 		if(islower(c))
 		{
-			printf("%c",c);
-			pos = ftell(file);
-			fseek(file, -1, SEEK_CUR);
-			fputc(toupper(c), file);
-			fseek(file, pos, SEEK_SET);
+			fseek(file,-1,SEEK_CUR);
+			fputc(c-32, file);
 		}
 	}
 

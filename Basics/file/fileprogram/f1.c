@@ -2,7 +2,7 @@
  WAP in C to count line , word and digit in file.
 
  -----i/p file------
- 123 abc coding
+ 123 abc coding
  file c ds 789 sirji
 -------$ ./a.out data
  o/p: no of line = 2 , word= 8 , digit= 6
@@ -33,24 +33,22 @@ int main(int argc , char **argv)
 	}
 
 
-	char s[Max_Len];
+	char ch;
 	int line = 0;
 	int word = 0;
 	int digit = 0;
 
-	while(fgets(s,sizeof(s), fp))
+	while((ch=fgetc(fp))!=EOF)
 	{
+		if(ch=='\n')
+			line++;
 
-		line++;
-		for(int i = 0 ; i<=strlen(s);i++)
-		{
-			if(s[i]==' '||s[i]=='\n')
-				word++;
-				
-			if(s[i]>='0'&&s[i]<='9')
-				digit++;
+		if(ch==' '||ch=='\n')
+			word++;
 
-		}
+		if(ch>='0'&&ch<='9')
+			digit++;
+
 	}
 
 	fclose(fp);

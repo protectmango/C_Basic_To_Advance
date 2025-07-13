@@ -30,15 +30,33 @@ int main(int argc, char **argv)
 
 	long line = 0;
 
-	char s[Max_Line];
+	char ch;
 
+	long len =0, i=0;
 
-	while(fgets(s, sizeof(s), file))
+	while((ch=fgetc(file))!=EOF)
+	{
+		if(ch=='\n')
+		{
+			if(len<i)
+				len = i;
+			i=0;
+			printf("%d\n", ch);
+
+		}
+			printf("%c,%ld\n", ch,i);
+		i++;
+	}
+
+	rewind(file);
+	char *s = malloc(sizeof(char)*(len+1));
+
+	while(fgets(s,(len+2), file))
 	{
 		line++;
 	}
 
-	printf("Using fgets()\nTotal Lines : %ld\n", line);
+	printf("Using fgets()\nTotal Lines : %ld, Len : %ld\n", line, len);
 
 	fclose(file);
 	return 0;
