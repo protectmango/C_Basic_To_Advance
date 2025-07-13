@@ -57,7 +57,7 @@ cc filename.o -o output or cc filename.o
 | Assembler        | `cc -C filename.s -o outputfilename.o`     | convert assembly  → opcode      |
 | Linker 	   | `cc filename.o -o output or cc filename.o` | link libraries and functions  |
 
-## Authod Message
+## Author Message
 Maintained By : `Gulshan Kumar Rana`  
 C compilation stages are important info to debug and understand the errors.
 		
