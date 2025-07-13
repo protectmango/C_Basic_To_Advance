@@ -31,8 +31,8 @@ graph LR
         null_ptr("NULL")
     end
 
-    head_ptr --> node1_data
-    node1_next --> node2_data
-    node2_next --> node3_data
-    node3_next --> null_ptr
+    %% head_ptr --> node1_data
+    %% node1_next --> node2_data
+    %% node2_next --> node3_data
+    %% node3_next --> null_ptr
 ```
