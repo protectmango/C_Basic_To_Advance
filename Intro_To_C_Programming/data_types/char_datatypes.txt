@@ -1,0 +1,30 @@
+Character are treated as 1 byte integers.
+
+Memory allocation : 1 byte.
+
+Char datatypes :
+	signed : 1 signed bit + 7 data bit.
+
+	range : 0 -> 127 , -128 -> -1
+		
+	+ve values : 
+		97 = |0|1|1|0|0|0|0|1|
+
+	-ve values : these are stored in its 2' Complement method.
+	    Step 1 : Binary of 10 		|0|0|0|0|1|0|1|0|  
+	    Step 2 : Invert all the values 	|1|1|1|1|0|1|0|1|
+	    Step 3 : Add 1 to index 0			      +1
+						-----------------
+						|1|1|1|1|0|1|1|0|
+		
+
+	
+	unsigned : 8 data bit.
+
+	range : 0 -> 255
+	
+	
+
+
+By Default a variable is treated as signed.
+	signed can store -ve values.

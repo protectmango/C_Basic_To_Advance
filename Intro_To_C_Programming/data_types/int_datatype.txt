@@ -1,0 +1,23 @@
+Integer Family : Stores only Integers.
+
+Memory : 4 Bytes. |0|0|0|0|0|0|0|0| |0|0|0|0|0|0|0|0| |0|0|0|0|0|0|0|0| |0|0|0|0|0|0|0|0|
+		  <-----8 bits---->	
+		  <-----------------------------32 bits--------------------------------->
+
+Range : Signed 				Unsigned
+
+	Min : -2147483648		0 to 4,294,967,295
+	Max :  2147483647 		(2 power 32 - 1) or (2^32 - 1)
+
+Data Type : Char 	Short int	int		long int	long long int
+	    1 byte	2 byte		4 byte		8 byte		8 byte
+	    8 bits	16 bits		32 bits		64 bits		64 bits
+
+Format 
+Specifier 
+
+Signed :    %c		%hd		%d		%ld		%lld
+Unsigned :  		%hu		%u		%lu		%llu
+
+
+
