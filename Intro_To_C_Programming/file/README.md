@@ -15,7 +15,7 @@ It is a typedef name to the predefined structure
 Success ✅ : Return base address of structure.  
 Failure ❎ : Return NULL  
 
->## FILE Functions
+## FILE Functions
 ```
 fopen( "Filepath", "opening mode" );
 ```  
@@ -69,7 +69,7 @@ rewind( file pointer );
 ```
 Return ↩️ : Nothing  
 
->## FILE : Binary Function
+## FILE : Binary Function
 ```
 size_t fread(void *ptr, size_t size, size_t count, FILE *stream);
 ```
@@ -82,7 +82,7 @@ size_t fwrite(const void *ptr, size_t size, size_t count, FILE *stream);
 Success ✅ : no of items written  
 Failure ❎ : 0  
 
->## FILE Pointer Navigation
+## FILE Pointer Navigation
 ```
 ftell(file pointer);
 ```  
@@ -112,7 +112,7 @@ Seek from end
 - `SEEK_END` : 2 : `fseek(fp, 0, SEEK_END);`
 
 ## Author Remark
-Created By : `Gulshan Kumar Rana`
+Maintained By : `Gulshan Kumar Rana`
 
 This is a Simple File Function documentation cheat sheet to get a quick revision of file functions which are used in C programming language
 
@@ -121,4 +121,5 @@ This is a Simple File Function documentation cheat sheet to get a quick revision
 - File Reading
 - File Writing
 - File Navigating
+
 
