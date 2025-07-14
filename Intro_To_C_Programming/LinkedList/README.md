@@ -259,7 +259,47 @@ int count_node(SLL *ptr)
     return c;
 }
 ```
+## Read data from File 
 
+### Calling of read file
+```c
+read_file(&head);  /*Call by referance*/
+```
+### Defination of read file 
+```c
+void read_file(SLL **ptr)
+{
+    SLL *new, *last;
+
+    FILE *fp;
+    fp = fopen("std.txt","r");
+
+    if(fp == 0)
+    {
+        printf("File not present\n");
+        return ;
+    }
+
+    while(1)
+    {
+        new = malloc(sizeof(SLL)):
+        if(fscanf(fp , "%d %s %f", &new->rollno, new->name, &new->marks) == -1)
+            break;
+
+        new->next = 0;
+        if(*ptr == 0)
+            *prt = new;
+        else
+            last = *ptr;
+
+        while(last ->next)
+        {
+            last = last-next;
+        }
+        last->next = new;
+    }
+}
+```
 ## Save data to File  
 
 ### Calling of save file
@@ -289,3 +329,4 @@ void save_file(SLL *ptr)
 }
 
 ```
+
