@@ -330,3 +330,63 @@ void save_file(SLL *ptr)
 
 ```
 
+## Delete Node from the record
+
+>[!Note]
+> 1. If record not present
+> 2. If record present but data not found
+> 3. If record found, data not found at 1st place
+> 4. Found at middle position
+> 5. Found at last position
+> 6. If node count 1
+
+### Calling of delete node 
+```c
+delete_node(&head);
+```
+
+### Defination of delete node
+```c
+void delete_node(SLL **ptr)
+{
+    if(*ptr == 0)
+    {
+        printf("No record found \n");
+        return ;
+    }
+
+    int n;
+    printf("Enter rollnumber to delete : ");
+    scanf("%d", &n);
+
+    SLL *del = *ptr, *prev; /*Store from first node*/
+
+    while((del)
+    {
+        /*If rollno present*/
+        if(n==del->roll)
+        {
+            /*Check first node*/
+            if(del == *ptr)
+            {
+                *ptr = del->next;
+            }
+            else
+            {
+                prev->next = del->next; /*Update previous node next address*/
+                free(del);
+                return ;
+            }
+        }
+        prev = del; /*follow the del ptr one step back*/
+
+        del  = del->next; /*Visti the next node*/
+    }
+}
+
+```
+
+### Author Message 
+
+Maintained By : `Gulshan Kumar Rana`
+
